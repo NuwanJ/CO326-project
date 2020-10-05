@@ -4,17 +4,17 @@
    "description": "",
    "main": "server.js",
    "dependencies": {
+      "mqtt": "^4.2.1",
       "serialport": "^7.1.5",
       "ws": "^7.1.2"
    },
-
    "devDependencies": {
       "nodemon": "^2.0.4"
    },
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "node server.js COM4",
-      "dev": "nodemon app/index.js COM4"
+      "dev": "nodemon server.js COM4"
    },
    "author": "",
    "license": "ISC"

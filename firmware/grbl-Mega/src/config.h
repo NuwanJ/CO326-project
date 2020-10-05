@@ -171,13 +171,14 @@ define HOMING_CYCLE_1 (1<<AXIS_5) // Home 5th axis (B)
 #define HOMING_CYCLE_5 (1<<AXIS_2) // OPTIONAL: Home Z axis
 
 #else // Classic 3 axis
-#define HOMING_CYCLE_1 (1<<AXIS_1) // Home X axis
-#define HOMING_CYCLE_2 (1<<AXIS_2) // Home Y axis
-#define HOMING_CYCLE_0 (1<<AXIS_3) // OPTIONAL: Home Z axis
+
+#define HOMING_CYCLE_0 (1<<AXIS_3)                // REQUIRED: First move Z to clear workspace.
+#define HOMING_CYCLE_1 ((1<<AXIS_1)|(1<<AXIS_2))
+
 #endif
 #else
-#define HOMING_CYCLE_0 (1<<AXIS_2)                // REQUIRED: First move Z to clear workspace.
-#define HOMING_CYCLE_1 ((1<<AXIS_1)|(1<<AXIS_3))  // OPTIONAL: Then move X,Y at the same time.
+#define HOMING_CYCLE_0 (1<<AXIS_3)                // REQUIRED: First move Z to clear workspace.
+#define HOMING_CYCLE_1 ((1<<AXIS_1)|(1<<AXIS_2))  // OPTIONAL: Then move X,Y at the same time.
 // #define HOMING_CYCLE_2                         // OPTIONAL: Uncomment and add axes mask to enable
 #endif // DEFAULTS_RAMPS_BOARD
 

@@ -8,6 +8,15 @@ var client  = mqtt.connect('mqtt://test.mosquitto.org')
 const TOPIC_COM2WEB = 'co326/com2web';
 const TOPIC_WEB2COM = 'co326/web2com';
 
+
+
+
+
+
+
+
+
+
 // USB Port selection
 console.log("Available Ports: ");
 SerialPort.list(function (err, ports) {
@@ -22,7 +31,6 @@ if(process.argv[2]==""){
 }
 
 // Need to write a validator to check this is available
-//var portName =  process.argv[2];
 var portName =  process.argv[2];
 
 var myPort = new SerialPort(portName,{baudRate: 115200 });
@@ -37,46 +45,31 @@ myPort.on('error', showError);
 parser.on('data', readSerialData);
 
 
+
+
+
+
+
+
 // --------------------------------------------------------
 
 client.on('connect', function () {
-  client.subscribe(TOPIC_WEB2COM, function (err) {
-    if (!err) {
-      client.publish(TOPIC_WEB2COM, 'Hello mqtt')
-    }
-  })
-})
-
-client.on('message', function (topic, message) {
-  // message is Buffer
-  console.log("->"+message.toString())
-  sendToSerial(message.toString());
-  //client.end()
-})
-
-/*
-client.on('connect', function () {
-
-   console.log("Connected");
-   client.subscribe(TOPIC_COM2WEB, function (err) {
-
-      // Subscribed to the MQTT topic
-      \*console.log(message.toString())
-      sendToSerial(message.toString());
-      client.publish(TOPIC_WEB2COM, message.toString());*\
+   client.subscribe(TOPIC_WEB2COM, function (err) {
+      if (!err) {
+         client.publish(TOPIC_WEB2COM, 'MQTT connection: success');
+      }
    })
 })
 
 client.on('message', function (topic, message) {
-   //if(topic==TOPIC_WEB2COM){
-      console.log(message.toString())
-      sendToSerial(message.toString());
-      client.publish(TOPIC_COM2WEB, message.toString());
-   //}else{
-      // Just ignore
-   //}
-})
-*/
+   if(topic==TOPIC_WEB2COM){
+      console.log("-> "+message.toString())
+      sendToSerial(message.toString() + '\n');
+
+   }
+});
+
+
 
 
 
@@ -86,10 +79,8 @@ function showPortOpen() {
    console.log('>> port open. Data rate: ' + myPort.baudRate);
 }
 
-// this is called when new data comes into the serial port:
 function readSerialData(data) {
-   console.log(data);
-   // send this to MQTT topic
+   console.log("<< " + data);
    client.publish(TOPIC_COM2WEB, data);
 }
 

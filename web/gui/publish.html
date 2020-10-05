@@ -9,8 +9,20 @@
 
    <script src="js/jquery-1.9.0.min.js"></script>
 
-   <script src="./js/motion.js"></script>
-   <script src="./js/mqtt.js"></script>
+   <script type="text/javascript" >
+
+   const TOPIC_COM2WEB = 'co326/com2web';
+   const TOPIC_WEB2COM = 'co326/web2com';
+
+   const mqtt_server = "test.mosquitto.org";
+   const mqtt_port = 8080;
+   const mqtt_destname = TOPIC_WEB2COM;
+
+</script>
+
+
+<script src="./js/motion.js"></script>
+<script src="./js/mqtt.js"></script>
 
 </head>
 
@@ -111,6 +123,8 @@
                            <button id="btnUnlock" class="w3-btn w3-light-grey app-panel-btn fa fa-unlock w3-xlarge"></button>
                            <button id="btnUpdate" class="w3-btn w3-light-grey app-panel-btn fa fa-question w3-xlarge"></button>
                            <button id="btnReset" class="w3-btn w3-light-grey app-panel-btn fa fa-refresh w3-xlarge"></button>
+
+                           <button id="btnResetZero" class="w3-btn w3-light-grey app-panel-btn fa fa-crosshairs w3-xlarge"></button>
                         </div>
                      </div>
 
@@ -146,7 +160,7 @@
                               <td>&nbsp;</td>
 
                               <td><button id="jogZPlus" onclick="jog(0,0,1,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-up w3-xlarge"></button></td>
-                              <td><button id="jogAPlus" onclick="jog(0,0,0,1,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-up w3-xlarge"></button></td>
+                              <td><button id="jogAPlus" onclick="jog(0,0,0,1,0)" class="w3-hide w3-btn w3-light-grey app-panel-btn fa fa-caret-up w3-xlarge"></button></td>
 
                            </tr>
                            <tr>
@@ -154,107 +168,112 @@
                               <td><button id="jogStop" onclick="jog(0,0,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-stop w3-xlarge"></button></td>
                               <td><button id="jogYPlus" onclick="jog(1,0,0,0,0)"  class="w3-btn w3-light-grey app-panel-btn fa fa-chevron-right w3-xlarge"></button></td>
                               <td><div class="app-panel-fake-btn w3-center">Z</td>
-                                 <td><div class="app-panel-fake-btn w3-center">A</td>
-                                 </tr>
-                                 <tr>
-                                    <td>&nbsp;</td>
-                                    <td><button id="jogXMin" onclick="jog(0,-1,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-chevron-down w3-xlarge"></button></td>
-                                    <td>&nbsp;</td>
+                                 <td><div class="w3-hide app-panel-fake-btn w3-center">A</div></td>
+                              </tr>
+                              <tr>
+                                 <td>&nbsp;</td>
+                                 <td><button id="jogXMin" onclick="jog(0,-1,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-chevron-down w3-xlarge"></button></td>
+                                 <td>&nbsp;</td>
 
-                                    <td><button id="jogZMin" onclick="jog(0,0,-1,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-down w3-xlarge"></button></td>
-                                    <td><button id="jogAMin" onclick="jog(0,0,0,-1,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-up w3-xlarge"></button></td>
-                                 </tr>
+                                 <td><button id="jogZMin" onclick="jog(0,0,-1,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-down w3-xlarge"></button></td>
+                                 <td><button id="jogAMin" onclick="jog(0,0,0,-1,0,0,0)" class="w3-hide w3-btn w3-light-grey app-panel-btn fa fa-caret-up w3-xlarge"></button></td>
+                              </tr>
 
-                              </table>
+                           </table>
 
-                              <table style="width: 100%;">
-                                 <tr>
-                                    <td>Step: </td>
-                                    <td>
-                                       <select class="w3-select" name="stepSize" id="stepSize" value="10">
-                                          <option value="1">1</option>
-                                          <option value="5">5</option>
-                                          <option selected value="10">10</option>
-                                          <option value="20">20</option>
-                                          <option value="100">100</option>
-                                       </select>
-                                    </td>
-                                 </tr>
+                           <table style="width: 100%;">
+                              <tr>
+                                 <td>Step: </td>
+                                 <td>
+                                    <select class="w3-select" name="stepSize" id="stepSize" value="10">
+                                       <option value="1">1</option>
+                                       <option value="5">5</option>
+                                       <option selected value="10">10</option>
+                                       <option value="20">20</option>
+                                       <option value="100">100</option>
+                                    </select>
+                                 </td>
+                              </tr>
 
-                                 <tr>
-                                    <td>Feed: </td>
-                                    <td>
-                                       <select class="w3-select" name="feedSize" id="feedSize" value="10">
-                                          <option value="100">100</option>
-                                          <option value="200">200</option>
-                                          <option value="500">500</option>
-                                          <option selected value="1000">1000</option>
-                                          <option value="1500">1500</option>
-                                       </select>
-                                    </td>
-                                 </tr>
-                              </table>
-                              <br>
-                           </div>
+                              <tr>
+                                 <td>Feed: </td>
+                                 <td>
+                                    <select class="w3-select" name="feedSize" id="feedSize" value="10">
+                                       <option value="100">100</option>
+                                       <option value="200">200</option>
+                                       <option value="500">500</option>
+                                       <option selected value="1000">1000</option>
+                                       <option value="1500">1500</option>
+                                    </select>
+                                 </td>
+                              </tr>
+                           </table>
+                           <br>
                         </div>
-
-
                      </div>
+
+
                   </div>
                </div>
             </div>
-
          </div>
 
-         <script>
+      </div>
+
+      <script>
 
 
-         function accordianHandler(id) {
-            document.getElementById(id).classList.toggle("w3-show");
-            document.getElementById(id).previousElementSibling.classList.toggle("w3-gray");
-         }
+      function accordianHandler(id) {
+         document.getElementById(id).classList.toggle("w3-show");
+         document.getElementById(id).previousElementSibling.classList.toggle("w3-gray");
+      }
 
-         $(document).ready(function(){
+      $(document).ready(function(){
 
-            mqttConnect();
+         mqttConnect();
 
-            accordianHandler("accJogControl");
-            //setup();
+         accordianHandler("accJogControl");
+         //setup();
 
-            $("#btnSend").click(function(){
-               sendCommand($("#serailSend").val());
-            })
-            $("#btnClear").click(function(){
-               $("#serialReceive").text("");
-               $("#serialSend").text("");
-            })
+         $("#btnSend").click(function(){
+            sendCommand($("#serailSend").val());
+         })
+         $("#btnClear").click(function(){
+            $("#serialReceive").text("");
+            $("#serialSend").text("");
+         })
 
-            $("#btnUnlock").click(function(){
-               sendCommand("$X");
-            });
-            $("#btnHome").click(function(){
-               sendCommand("$H\n$X");
-            });
-            $("#btnUpdate").click(function(){
-               sendCommand("?");
-            });
-            $("#btnReset").click(function(){
-               sendCommand("\u0018");
-            });
-            $("#serailSend").keypress(function (e) {
-               var txt = $(this).val();
-               if (e.which == 13) {
-                  $("#serialReceive").append(txt + "\n");
-                  sendCommand(txt);
-               }else{
-                  //$("#serialReceive").append(txt + "\n");
-               }
-            });
-
+         $("#btnUnlock").click(function(){
+            sendCommand("$X");
          });
-         </script>
+         $("#btnHome").click(function(){
+            sendCommand("$H\n$X\nG92 X0 Y0 Z0");
+         });
+         $("#btnUpdate").click(function(){
+            sendCommand("?");
+         });
+         $("#btnReset").click(function(){
+            sendCommand("\u0018");
+         });
+         $("#btnResetZero").click(function(){
+            sendCommand("G92 X0 Y0 Z0");
+         });
+
+
+         $("#serailSend").keypress(function (e) {
+            var txt = $(this).val();
+            if (e.which == 13) {
+               $("#serialReceive").append(txt + "\n");
+               sendCommand(txt);
+            }else{
+               //$("#serialReceive").append(txt + "\n");
+            }
+         });
+
+      });
+      </script>
 
 
 
-      </body>
-      </html>
+   </body>
+   </html>
