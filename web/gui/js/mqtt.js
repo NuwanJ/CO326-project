@@ -45,6 +45,21 @@ function onMessageArrived(message) {
    //if(topic == TOPIC_WEB2COM){
 
    if(result != ""){
+
+      if(result.startsWith("<")){
+         console.log("Coordinate Result");
+
+         var state = result.split('|')[0].substring(1);
+         var coordinates = result.split('|')[1].split(':')[1].split(',');
+
+         console.log(coordinates);
+
+         $('#lblXCord').text(coordinates[0]);
+         $('#lblYCord').text(coordinates[1]);
+         $('#lblZCord').text(coordinates[2]);
+
+         $('#lblSatus').text(state);
+      }
       document.getElementById("serialReceive").innerHTML += result;
       const txtReceiveBox = document.getElementById("serialReceive");
       txtReceiveBox.innerHTML = result + '\n' + txtReceiveBox.innerHTML
