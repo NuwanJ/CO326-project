@@ -14,7 +14,7 @@ function jog(x, y, z, a, b){
       sendCommand("\u0085");
    }else{
       sendCommand("$J=G91 X" + (1*x*amount) +"Y"+ (1*y*amount) + "Z" + (1*z*amount) + "F" + feed);
-       //+ "A" + (1*a*amount) + "B" + (1*b*amount) 
+      //+ "A" + (1*a*amount) + "B" + (1*b*amount)
    }
 }
 
@@ -24,16 +24,18 @@ var delayInMilliseconds = 2000;
 function gotToCoordinate(x,y,z) {
 
    //Move to home
-   sendCommand("G0Z30\n");
+   sendCommand("G0Z10\n");
 
    //Move on X,Y plane after a delay
    setTimeout(function() {
-      sendCommand("G1 x"+x+" y"+y);
-   }, delayInMilliseconds);
+      sendCommand("G1 x"+x+" y"+y + " F1000");
+      //Move on Z axis after a delay
+      setTimeout(function() {
+         sendCommand("G1 z"+z);
+      }, 5000);
 
-   //Move on Z axis after a delay
-   setTimeout(function() {
-      sendCommand("G1 z"+z);
-   }, delayInMilliseconds);
+   }, 3000);
+
+
 
 }
