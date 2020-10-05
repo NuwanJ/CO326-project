@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="css/w3.css">
+   <link rel="stylesheet" href="css/w3-theme.css">
+   <link rel="stylesheet" href="css/font-awesome.min.css">
+   <link rel="stylesheet" href="css/index.css">
+
+   <script src="js/jquery-1.9.0.min.js"></script>
+
+   <title>RobotArm GUI</title>
+
+   <script type="text/javascript">
+   var socket = new WebSocket("ws://localhost:3000");
+
+   function setup() {
+      socket.onopen = openSocket;
+      socket.onmessage = showData;
+   }
+
+   function openSocket() {
+      $("#lblSatus").text("Socket open");
+      //updateTime();
+   }
+
+   function showData(result) {
+
+      if(result.data.startsWith("<")){
+         var inData = (result.data).split("|");
+
+         inData = (inData[1].split(":"))[1];
+         var coord = inData.split(",");
+
+         $("#lblXCord").html(coord[0]);
+         $("#lblYCord").html(coord[1]);
+         $("#lblZCord").html(coord[2]);
+
+         console.log(" Location: "+ inData);
+
+      }else{
+         $("#serialReceive").prepend(result.data.replace("<", "[").replace(">", "]") + "\n");
+         //updateTime();
+      }
+
+   }
+   </script>
+
+   <style>
+   .app-accordian-title{
+      background-color: lightgray;
+      color: black;
+      border:1px solid black;
+      text-align: left;
+   }
+
+   .app-panel-btn{
+      border: 1px solid black;
+      height: 40px;
+      width: 40px;
+      padding: 4px;
+      margin: 2px;
+   }
+   .app-panel-btn:hover{
+      background-color: gray!important;
+   }
+
+   .app-panel-fake-btn{
+      border: 0;
+      height: 40px;
+      width: 40px;
+      padding: 4px;
+      margin: 2px;
+   }
+
+   </style>
+</head>
+
+<body>
+
+   <div class="w3-container" >
+      <div class="w3-row" style="margin:0!important;">
+         <div class="w3-col s12 m9 l9">
+            <div class=""  style="min-height: 70vh;">
+               &nbsp;
+            </div>
+
+            <div class="w3-row">
+               <div class="w3-col s12 m6 l6">
+                  <textarea id="serialSend" readonly style="height: 20vh!important; width:100%;"></textarea>
+               </div>
+               <div class="w3-col s12 m6 l6">
+                  <textarea id="serialReceive" readonly style="height: 20vh!important; width:100%;"></textarea>
+               </div>
+            </div>
+
+            <ul class="w3-navbar w3-border w3-light-grey">
+               <li><a id="btnClear" class="w3-hover-red" href="#">Clear</a></li>
+               <li><a class="w3-hover-blue" href="#">Link 1</a></li>
+               <li><a class="w3-hover-green" href="#">Link 2</a></li>
+               <li><a class="w3-hover-teal" href="#">Link 3</a></li>
+               <li class="w3-right"><a href="#" id="btnSend" class="w3-btn w3-gray fa fa-chevron-right w3-xlarge"></a></li>
+               <li class="w3-right">
+                  <input id="serailSend" class="w3-input w3-border" type="text">
+               </li>
+               <li class="w3-right"><span>Send:</span></li>
+            </ul>
+         </div>
+
+         <div class="w3-col s12 m3 l3 w3-light-gray w3-border-left " style="min-height: 100vh; padding:5px 5px!important">
+            <div>
+               <div class="w3-accordion w3-light-grey">
+                  <div class="w3-card-4" style="margin:2px;">
+                     <div class="w3-container">
+                        <p>Work Coordinates:<br>
+                           &nbsp;&nbsp;
+                           <span>X:<span id="lblXCord">0.00</span></span> |
+                           <span>Y:<span id="lblYCord">0.00</span></span> |
+                           <span>Z:<span id="lblZCord">0.00</span></span>
+                        </p>
+
+                        <p>Status:<br>
+                           &nbsp;&nbsp;
+                           <span id="lblSatus">Not Connected</span>
+                        </p>
+
+                        <br>
+                        <div class="w3-btn-group">
+                           <button id="btnHome" class="w3-btn w3-light-grey app-panel-btn fa fa-home w3-xlarge"></button>
+                           <button id="btnUnlock" class="w3-btn w3-light-grey app-panel-btn fa fa-unlock w3-xlarge"></button>
+                           <button id="btnUpdate" class="w3-btn w3-light-grey app-panel-btn fa fa-question w3-xlarge"></button>
+                           <button id="btnReset" class="w3-btn w3-light-grey app-panel-btn fa fa-refresh w3-xlarge"></button>
+                        </div>
+                     </div>
+
+                     <br>
+
+                  </div>
+
+                  <div class="w3-card-4" style="margin:2px;">
+                     <button onclick="accordianHandler('accCommands')" class="w3-btn-block app-accordian-title">
+                        Command Panel
+                     </button>
+                     <div id="accCommands" class="w3-accordion-content w3-container">
+                        <br>
+                        <div class="w3-btn-group">
+                           <button class="w3-btn w3-light-grey app-panel-btn">1</button>
+                           <button class="w3-btn w3-light-grey app-panel-btn">2</button>
+                           <button class="w3-btn w3-light-grey app-panel-btn">3</button>
+                           <button class="w3-btn w3-light-grey app-panel-btn">4</button>
+                        </div>
+                        <br>
+                     </div>
+                  </div>
+                  <div class="w3-card-4" style="margin:2px;">
+                     <button onclick="accordianHandler('accJogControl')" class="w3-btn-block app-accordian-title">
+                        Jog Control
+                     </button>
+                     <div id="accJogControl" class="w3-accordion-content w3-container">
+
+                        <table>
+                           <tr>
+                              <td>&nbsp;</td>
+                              <td><button id="jogXPlus" onclick="jog(1,0,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-chevron-up w3-xlarge"></button></td>
+                              <td>&nbsp;</td>
+
+                              <td><button id="jogZPlus" onclick="jog(0,0,1,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-up w3-xlarge"></button></td>
+                              <td><button id="jogAPlus" onclick="jog(0,0,0,1,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-up w3-xlarge"></button></td>
+
+                           </tr>
+                           <tr>
+                              <td><button id="jogYMin" onclick="jog(0,-1,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-chevron-left w3-xlarge"></button></td>
+                              <td><button id="jogStop" onclick="jog(0,0,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-stop w3-xlarge"></button></td>
+                              <td><button id="jogYPlus" onclick="jog(0,1,0,0,0)"  class="w3-btn w3-light-grey app-panel-btn fa fa-chevron-right w3-xlarge"></button></td>
+                              <td><div class="app-panel-fake-btn w3-center">Z</td>
+                                 <td><div class="app-panel-fake-btn w3-center">A</td>
+                                 </tr>
+                                 <tr>
+                                    <td>&nbsp;</td>
+                                    <td><button id="jogXMin" onclick="jog(-1,0,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-chevron-down w3-xlarge"></button></td>
+                                    <td>&nbsp;</td>
+
+                                    <td><button id="jogZMin" onclick="jog(0,0,-1,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-down w3-xlarge"></button></td>
+                                    <td><button id="jogAMin" onclick="jog(0,0,0,-1,0,0,0)" class="w3-btn w3-light-grey app-panel-btn fa fa-caret-up w3-xlarge"></button></td>
+                                 </tr>
+
+                              </table>
+
+                              <table style="width: 100%;">
+                                 <tr>
+                                    <td>Step: </td>
+                                    <td>
+                                       <select class="w3-select" name="stepSize" id="stepSize" value="10">
+                                          <option value="1">1</option>
+                                          <option value="5">5</option>
+                                          <option selected value="10">10</option>
+                                          <option value="20">20</option>
+                                          <option value="100">100</option>
+                                       </select>
+                                    </td>
+                                 </tr>
+
+                                 <tr>
+                                    <td>Feed: </td>
+                                    <td>
+                                       <select class="w3-select" name="feedSize" id="feedSize" value="10">
+                                          <option value="100">100</option>
+                                          <option value="200">200</option>
+                                          <option value="500">500</option>
+                                          <option selected value="1000">1000</option>
+                                          <option value="1500">1500</option>
+                                       </select>
+                                    </td>
+                                 </tr>
+                              </table>
+                              <br>
+                           </div>
+                        </div>
+
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+
+         <script>
+         function accordianHandler(id) {
+            document.getElementById(id).classList.toggle("w3-show");
+            document.getElementById(id).previousElementSibling.classList.toggle("w3-gray");
+         }
+
+         $(document).ready(function(){
+            accordianHandler("accJogControl");
+            setup();
+
+            $("#btnSend").click(function(){
+               sendCommand($("#serailSend").val());
+            })
+            $("#btnClear").click(function(){
+               $("#serialReceive").text("");
+               $("#serialSend").text("");
+            })
+
+            $("#btnUnlock").click(function(){
+               sendCommand("$X");
+            });
+            $("#btnHome").click(function(){
+               sendCommand("$H\n$X");
+            });
+            $("#btnUpdate").click(function(){
+               sendCommand("?");
+            });
+            $("#btnReset").click(function(){
+               sendCommand("\u0018");
+            });
+            $("#serailSend").keypress(function (e) {
+               var txt = $(this).val();
+               if (e.which == 13) {
+                  $("#serialReceive").append(txt + "\n");
+                  sendCommand(txt);
+               }else{
+                  //$("#serialReceive").append(txt + "\n");
+               }
+            });
+
+         });
+
+         function jog(x, y, z){
+            jog(x, y, z, 0, 0);
+         }
+         function jog(x, y, z, a){
+            jog(x, y, z, a, 0);
+         }
+         function jog(x, y, z, a, b){
+            var amount = $("#stepSize").children("option:selected").val();
+            var feed = $("#feedSize").children("option:selected").val();
+
+            console.log(" " + amount);
+
+            if(x==0 && y==0 && z==0 && a==0 && b==0){
+               sendCommand("\u0085");
+            }else{
+               sendCommand("$J=G91 X" + (1*x*amount) +"Y"+ (1*y*amount) + "Z" + (1*z*amount) + "A" + (1*a*amount) + "B" + (1*b*amount) + "F" + feed);
+            }
+         }
+         function sendCommand(text){
+            socket.send(text + "\n");
+            console.log(">> Send: " + text);
+            serialSend.append(text + "\n");
+         }
+         </script>
+
+      </body>
+      </html>
