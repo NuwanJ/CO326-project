@@ -36,3 +36,42 @@
   background: #4288da;
   cursor: pointer;
 }
+
+
+.app-accordian-title{
+   background-color: lightgray;
+   color: black;
+   border:1px solid black;
+   text-align: left;
+}
+
+.app-panel-btn{
+   border: 1px solid black;
+   height: 40px;
+   width: 40px;
+   padding: 4px;
+   margin: 2px;
+}
+.app-panel-btn:hover{
+   background-color: gray!important;
+}
+
+.app-panel-fake-btn{
+   border: 0;
+   height: 40px;
+   width: 40px;
+   padding: 4px;
+   margin: 2px;
+}
+
+
+.center {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 250px;
+}
+
+.btnSpacer{
+   margin: 5px!important;
+}

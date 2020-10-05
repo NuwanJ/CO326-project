@@ -59,9 +59,9 @@
   #define DEFAULT_INVERT_PROBE_PIN 0 // false
   #define DEFAULT_LASER_MODE 0 // false
   #define DEFAULT_HOMING_ENABLE 1  // false
-  #define DEFAULT_HOMING_DIR_MASK 8 // move positive dir
-  #define DEFAULT_HOMING_FEED_RATE 25.0 // mm/min
-  #define DEFAULT_HOMING_SEEK_RATE 400.0 // mm/min
+  #define DEFAULT_HOMING_DIR_MASK 7 // move positive dir
+  #define DEFAULT_HOMING_FEED_RATE 250 // mm/min
+  #define DEFAULT_HOMING_SEEK_RATE 1000 // mm/min
   #define DEFAULT_HOMING_DEBOUNCE_DELAY 250 // msec (0-65k)
   #define DEFAULT_HOMING_PULLOFF 2.0 // mm
 #endif
@@ -102,7 +102,7 @@
   #define DEFAULT_STEP_PULSE_MICROSECONDS 10
   #define DEFAULT_STEPPING_INVERT_MASK 0
   #define DEFAULT_DIRECTION_INVERT_MASK 0
-  #define DEFAULT_STEPPER_IDLE_LOCK_TIME 50 // msec (0-254, 255 keeps steppers enabled)
+  #define DEFAULT_STEPPER_IDLE_LOCK_TIME 254 // msec (0-254, 255 keeps steppers enabled)
   #define DEFAULT_STATUS_REPORT_MASK 1 // MPos enabled
   #define DEFAULT_JUNCTION_DEVIATION 0.02 // mm
   #define DEFAULT_ARC_TOLERANCE 0.002 // mm
@@ -114,11 +114,11 @@
   #define DEFAULT_INVERT_PROBE_PIN 0 // false
   #define DEFAULT_LASER_MODE 1 // false
   #define DEFAULT_HOMING_ENABLE 1  // true
-  #define DEFAULT_HOMING_DIR_MASK 8 // move positive dir
-  #define DEFAULT_HOMING_FEED_RATE 25.0 // mm/min
-  #define DEFAULT_HOMING_SEEK_RATE 450.0 // mm/min
+  #define DEFAULT_HOMING_DIR_MASK 7 // move positive dir
+  #define DEFAULT_HOMING_FEED_RATE 250 // mm/min
+  #define DEFAULT_HOMING_SEEK_RATE 1000 // mm/min
   #define DEFAULT_HOMING_DEBOUNCE_DELAY 250 // msec (0-65k)
-  #define DEFAULT_HOMING_PULLOFF 5.0 // mm
+  #define DEFAULT_HOMING_PULLOFF 3 // mm
 #endif
 
 #endif

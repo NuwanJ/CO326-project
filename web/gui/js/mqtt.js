@@ -1,4 +1,14 @@
 
+const TOPIC_COM2WEB = 'co326/com2web';
+const TOPIC_WEB2COM = 'co326/web2com';
+
+const mqtt_server = "test.mosquitto.org";
+const mqtt_port = 8080;
+const mqtt_destname = TOPIC_WEB2COM;
+
+var client = new Paho.MQTT.Client(mqtt_server, mqtt_port,"");
+// called when a message arrives
+
 function mqttConnect(){
    client.connect({onSuccess:onConnect});
    document.getElementById("serialSend").innerHTML = "Trying to connect...";
