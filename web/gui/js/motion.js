@@ -23,6 +23,8 @@ var delayInMilliseconds = 2000;
 //Move to a certain coordinate on X,Y,Z 3D plane
 function gotToCoordinate(x,y,z) {
 
+   console.log("x:"x + " y:"+y + " z:" + z );
+
    //Move to home
    sendCommand("G0 Z0\n");
 
