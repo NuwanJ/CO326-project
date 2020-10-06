@@ -50,7 +50,7 @@ function onMessageArrived(message) {
          console.log("Coordinate Result");
 
          var state = result.split('|')[0].substring(1);
-         var coordinates = result.split('|')[3].split(':')[1].split(',');
+         var coordinates = result.split('|')[1].split(':')[1].split(',');
 
          console.log(coordinates);
 

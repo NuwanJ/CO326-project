@@ -24,7 +24,7 @@ var delayInMilliseconds = 2000;
 function gotToCoordinate(x,y,z) {
 
    //Move to home
-   sendCommand("G0Z10\n");
+   sendCommand("G0 Z0\n");
 
    //Move on X,Y plane after a delay
    setTimeout(function() {

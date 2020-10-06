@@ -47,32 +47,32 @@
                   </div>
                   <div class="w3-col s1 m1 l1" >
                      Analog Inputs<br><br>
-                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(10,20,0)">0</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-green">1</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-green">2</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-green">3</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(400,450,50)">0</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(400,400,50)">1</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(400,350,50)">2</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(400,300,50)">3</button><br>
                   </div>
                   <div class="w3-col s1 m1 l1">
                      Analog Outputs<br><br>
-                     <button class="btnSpacer w3-button w3-circle w3-green">0</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-green">1</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-green">2</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-green">3</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(450,450,50)">0</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(450,400,50)">1</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(450,350,50)">2</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-green" onclick="gotToCoordinate(450,300,50)">3</button><br>
                   </div>
                   <div class="w3-col s1 m1 l1">&nbsp;</div>
                   <div class="w3-col s1 m1 l1">
                      Digital Inputs<br><br>
-                     <button class="btnSpacer w3-button w3-circle w3-blue">0</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-blue">1</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-blue">2</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-blue">3</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-blue" onclick="gotToCoordinate(550,450,50)">0</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-blue" onclick="gotToCoordinate(550,400,50)">1</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-blue" onclick="gotToCoordinate(550,350,50)">2</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-blue" onclick="gotToCoordinate(550,300,50)">3</button><br>
                   </div>
                   <div class="w3-col s1 m1 l1">
                      Digital Outputs<br><br>
-                     <button class="btnSpacer w3-button w3-circle w3-blue">0</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-blue">1</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-blue">2</button><br>
-                     <button class="btnSpacer w3-button w3-circle w3-blue">3</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-blue" onclick="gotToCoordinate(600,450,50)">0</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-blue" onclick="gotToCoordinate(600,400,50)">1</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-blue" onclick="gotToCoordinate(600,350,50)">2</button><br>
+                     <button class="btnSpacer w3-button w3-circle w3-blue" onclick="gotToCoordinate(600,300,50)">3</button><br>
                   </div>
                </div>
 
@@ -247,7 +247,7 @@
             sendCommand("$X");
          });
          $("#btnHome").click(function(){
-            sendCommand("$H\n$X\nG92 X0 Y0 Z0");
+            sendCommand("$H\n$X\nG92 X0 Y0 Z0\nG92.1");
          });
          $("#btnUpdate").click(function(){
             sendCommand("?");
@@ -256,7 +256,7 @@
             sendCommand("\u0018");
          });
          $("#btnResetZero").click(function(){
-            sendCommand("G92 X0 Y0 Z0");
+            sendCommand("G92 X0 Y0 Z0\nG92.1");
          });
 
 
