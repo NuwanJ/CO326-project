@@ -1,0 +1,19 @@
+
+
+Group 8 
+
+E/15/140
+E/15/173
+E/15/350
+
+
+./nodeServer		
+	This is a RTU unit, which translate MQTT commands to UART.
+	Should run at host machine, which is connected to the CNC machine
+
+./GUI/index.html	
+	This can be open from anywhere and give instructions to the machine
+
+
+Full design and Project repository available on,
+	https://github.com/NuwanJ/CO326-project

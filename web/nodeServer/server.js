@@ -10,13 +10,6 @@ const TOPIC_WEB2COM = 'co326/web2com';
 
 
 
-
-
-
-
-
-
-
 // USB Port selection
 console.log("Available Ports: ");
 SerialPort.list(function (err, ports) {
