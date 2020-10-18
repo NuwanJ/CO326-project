@@ -1,7 +1,6 @@
 
 var client = new Paho.MQTT.Client(mqtt_server, mqtt_port,"");
 
-
 function mqttConnect(){
    client.connect({onSuccess:onConnect});
 
@@ -45,7 +44,6 @@ function onMessageArrived(message) {
    //if(topic == TOPIC_WEB2COM){
 
    if(result != ""){
-
       if(result.startsWith("<")){
          console.log("Coordinate Result");
 
