@@ -1,5 +1,5 @@
-# CNC Based 3 axis remote
-### CO326 Computer Systems Engineeging
+# CNC base 3-axis remotely controlled pick and place robot
+### CO326 Computer Systems Engineering
 
 ## Overview
 Overview
