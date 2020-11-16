@@ -1,12 +1,12 @@
-#theme: jekyll-theme-minimal
+theme: jekyll-theme-minimal
 
-theme: jekyll-theme-slate
-exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"
-, "docs/tests/", "firmware/"]
-title: "CNC base 3-axis remotely controlled pick and place robot"
+# theme: jekyll-theme-slate
+# exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"
+# , "docs/tests/", "firmware/"]
+#title: "CNC base 3-axis remotely controlled pick and place robot"
 
-back_to_top: true
-back_to_top_text: "Back to top"
+# back_to_top: true
+# back_to_top_text: "Back to top"
 
 # Google Analytics Tracking (optional)
 # e.g, UA-1234567-89
