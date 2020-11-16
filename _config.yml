@@ -1,5 +1,5 @@
 #theme: jekyll-theme-minimal
 
-remote_theme: NuwanJ/minima
+theme: just-the-docs
 exclude:
   - firmware/*
