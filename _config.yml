@@ -1,3 +1,5 @@
 #theme: jekyll-theme-minimal
 
 remote_theme: NuwanJ/minima
+exclude:
+  - firmware/*
