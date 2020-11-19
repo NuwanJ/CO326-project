@@ -1,5 +1,5 @@
 
-var client = new Paho.MQTT.Client(mqtt_server, mqtt_port,"");
+var client = new Paho.MQTT.Client(mqtt_server, mqtt_port,"/socket.io");
 
 function mqttConnect(){
    client.connect({onSuccess:onConnect});
