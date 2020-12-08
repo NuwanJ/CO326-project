@@ -27,10 +27,10 @@ npm install
 
 1. Connect the machine into PC
 2. Identify the COM port number, using device manager or any other application
-3. Run the following command. (Change the port COMX with the port number you obtained in step 3)
+3. Run the following command. (Change the port COMX with the port number you obtained in step 2)
 
 ```
-npm start COM4
+npm start COMX
 ```
 
 ## View controller software
