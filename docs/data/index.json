@@ -1,4 +1,5 @@
 {
+   "visibility": true,
    "title":"CNC base 3-axis remotely controlled pick and place robot",
    "course": "CO326",
    "description":"In this project, we hope to develop a CNC (Computer Numerical Control) based pick and place arm, which will help to try different wiring arrangements in a PLC rig and try experiments on it remotely.",

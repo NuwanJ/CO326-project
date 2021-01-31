@@ -1,0 +1,13 @@
+# This theme is based on https://github.com/jekyll/minima
+# Please refer above link to know the available configurations
+
+title: "CNC base 3-axis remotely controlled pick and place robot"
+remote_theme: cepdnaclk/eYY-project-theme
+description: "In this project, we hope to develop a CNC (Computer Numerical Control) based pick and place arm, which will help to try different wiring arrangements in a PLC rig and try experiments on it remotely."
+markdown: kramdown
+
+kramdown:
+  parse_block_html: true
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
