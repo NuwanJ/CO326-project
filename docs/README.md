@@ -70,6 +70,12 @@ Students can log into the remote platform using the HMI developed using JavaScri
 
 ![image](https://user-images.githubusercontent.com/11540782/96547467-c3584300-12c9-11eb-9978-2b5fc89b1ce0.png)
 
+
+## Funding
+
+This project was funded by the *Prof. Suhada Jayasuriya Project Support Fund* through *PEFAA* [https://pefaa.net/](https://pefaa.net/).
+
+
 ## Links
 
 - [Project Repository](https://github.com/cepdnaclk/{{ page.repository-name }}){:target="_blank"}
