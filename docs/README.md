@@ -68,12 +68,13 @@ Students can log into the remote platform using the HMI developed using JavaScri
 
 ![image](https://user-images.githubusercontent.com/11540782/96547229-6066ac00-12c9-11eb-8087-6cc6f2a74558.png)
 
-![image](https://user-images.githubusercontent.com/11540782/96547467-c3584300-12c9-11eb-9978-2b5fc89b1ce0.png)
+![image](https://user-images.githubusercontent.com/11540782/154018388-807540e9-1e97-47a0-88cc-06826116a967.jpg)
 
 
 ## Funding
 
 This project was funded by the *Prof. Suhada Jayasuriya Project Support Fund* through *PEFAA* [https://pefaa.net/](https://pefaa.net/).
+![PEFAA](https://user-images.githubusercontent.com/11540782/154018492-d90b1ad1-440f-42c8-b649-14526f6da3f4.png)
 
 
 ## Links
